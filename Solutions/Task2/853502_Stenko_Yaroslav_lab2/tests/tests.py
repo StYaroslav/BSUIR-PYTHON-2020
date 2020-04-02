@@ -104,7 +104,7 @@ class TestExternalSortResult(unittest.TestCase):
         self.assertTrue(file_is_sorted())
 
 
-'''class TestExternalSortErrorOccurrence(unittest.TestCase):
+class TestExternalSortErrorOccurrence(unittest.TestCase):
     def setUp(self):
         with open('numbers.txt', 'w') as self.file:
             self.file.writelines('{}\n'.format(random.randint(-1000000, 1000000)) for _ in range(1000))
@@ -112,7 +112,7 @@ class TestExternalSortResult(unittest.TestCase):
             self.file.writelines('{}\n'.format(random.randint(-1000000, 1000000)) for _ in range(1000))
 
     def test_external_sort_value_error(self):
-        self.assertRaises(ValueError, split_file('numbers.txt', 2000))'''
+        self.assertRaises(ValueError, split_file, 'numbers.txt', 1000)
 
 
 class TestFromJson(unittest.TestCase):
