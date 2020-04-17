@@ -1,19 +1,21 @@
 import random
-from tasks.external_merge_sort import split_file, merge_split_files
+from tasks.external_merge_sort import merge_split_files, split_file
 from tasks.json_serializer import Person, to_json
 from tasks.vector import Vector
 from tasks.cached import diff_function
 from tasks.json_deserializer import from_json
 from tasks.singleton import Singleton
+import json
 
 
 def external_sort_example():
+    input_check = [0] * 1
     total_numbers_in_file = 1000000
     with open('numbers.txt', 'w') as f:
         f.writelines('{}\n'.format(random.randint(-1000000, 1000000)) for _ in range(total_numbers_in_file))
     small_file_size = total_numbers_in_file / 10
-    temp_files_list = split_file('numbers.txt', small_file_size)
-    merge_split_files(temp_files_list)
+    temp_files_list = split_file('numbers.txt', small_file_size, input_check)
+    merge_split_files(temp_files_list, input_check)
 
 
 def to_json_example():
@@ -47,10 +49,15 @@ def cached_decorator_example():
 
 def from_json_example():
     person = Person('belarus', 18, True)
+    '''example = json.loads(json.dumps({None: True, 18: [1, 2, '6'], False: {12: (1, 2), 'string': 123}}))
+    print(json.dumps({None: True, 18: [1, 2, '6'], False: {12: (1, 2), 'string': 123}}))'''
     json_string = to_json(person)
     print("Json string: ", json_string)
+    # my_json = from_json(json.dumps({None: True, 18: [1, 2, '6'], False: {12: (1, 2), 'string': 123}}))
     python_object = from_json(json_string)
     print("Python object: ", python_object)
+    # print("JSON: ", example)
+    # print("MY JSON:", my_json)
 
 
 def singleton_example():

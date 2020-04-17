@@ -53,4 +53,4 @@ class Vector:
 
 
 class DimensionError(Exception):
-    pass
+    print("Vectors have different dimensions!")

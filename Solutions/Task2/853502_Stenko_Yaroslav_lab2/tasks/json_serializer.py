@@ -26,8 +26,10 @@ def to_json(obj):
     elif obj is None:
         return 'null'
     elif isinstance(obj, str):
-        return '"{}"'.format(obj)
-    elif isinstance(obj, list):
+        temp = repr(obj)
+        temp = temp.replace("'", '"')
+        return temp
+    elif isinstance(obj, list) or isinstance(obj, tuple):
         result += '['
         for element in obj:
             result += to_json(element)
@@ -35,18 +37,15 @@ def to_json(obj):
         result = result[0:-2]
         result += ']'
         return result
-    elif isinstance(obj, tuple):
-        result += '('
-        for element in obj:
-            result += to_json(element)
-            result += ', '
-        result = result[0:-2]
-        result += ')'
-        return result
     elif isinstance(obj, dict):
         result += '{'
         for key, value in obj.items():
-            result += to_json(key)
+            if not isinstance(key, str):
+                result += '"'
+                result += to_json(key)
+                result += '"'
+            else:
+                result += to_json(key)
             result += ': '
             result += to_json(value)
             result += ', '

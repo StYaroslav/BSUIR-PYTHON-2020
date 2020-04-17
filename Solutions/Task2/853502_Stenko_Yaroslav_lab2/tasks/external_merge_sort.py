@@ -28,14 +28,22 @@ def construct_min_heap(array):
         heapify(array, i)
 
 
-def split_file(init_file, small_file_size):
+def split_file(init_file, small_file_size, input_check):
     temp_files = []
     with open(init_file) as file:
         temp_buffer = []
         size = 0
         while True:
             number = file.readline()
-            if not number:
+            try:
+                int(number)
+            except ValueError:
+                if number == '':
+                    break
+                print("Incorrect input!")
+                for tf in temp_files:
+                    tf.close()
+                input_check[0] = 1
                 break
             temp_buffer.append(int(number))
             size += 1
@@ -50,7 +58,9 @@ def split_file(init_file, small_file_size):
     return temp_files
 
 
-def merge_split_files(temp_files):
+def merge_split_files(temp_files, input_check):
+    if input_check[0] == 1:
+        return
     min_elements_list = []
     for file in temp_files:
         item = int(file.readline().strip())
