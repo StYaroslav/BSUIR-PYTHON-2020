@@ -7,7 +7,8 @@ except ModuleNotFoundError:
 
 
 class FormatException(Exception):
-    print("Input string doesn't match json string parameters!")
+    def __init__(self, message='Error'):
+        self.message = message
 
 
 def from_json(json):
@@ -16,9 +17,9 @@ def from_json(json):
     invalid_null_pattern = re.compile('None')
     try:
         if re.search(invalid_key_pattern, json) or re.search(invalid_bool_pattern, json) or re.search(invalid_null_pattern, json):
-            raise FormatException
+            raise FormatException("Input string doesn't match json string parameters!")
     except SyntaxError:
-        raise FormatException
+        raise FormatException("Input string doesn't match json string parameters!")
     edited_string = re.findall(r'\w+|["{\[\]]', json)
     edited_string_iterator = iter(edited_string)
     return converter(edited_string_iterator)

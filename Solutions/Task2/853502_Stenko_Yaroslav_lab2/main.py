@@ -1,5 +1,5 @@
 import argparse
-from tasks_examples.examples import external_sort_example, to_json_example, vector_example, from_json_example, \
+from task_examples.examples import external_sort_example, to_json_example, vector_example, from_json_example, \
     cached_decorator_example, singleton_example
 
 tasks = {1: external_sort_example,

@@ -5,7 +5,6 @@ from tasks.vector import Vector
 from tasks.cached import diff_function
 from tasks.json_deserializer import from_json
 from tasks.singleton import Singleton
-import json
 
 
 def external_sort_example():
@@ -49,8 +48,8 @@ def cached_decorator_example():
 
 def from_json_example():
     person = Person('belarus', 18, True)
-    '''example = json.loads(json.dumps({None: True, 18: [1, 2, '6'], False: {12: (1, 2), 'string': 123}}))
-    print(json.dumps({None: True, 18: [1, 2, '6'], False: {12: (1, 2), 'string': 123}}))'''
+    # example = json.loads(json.dumps({None: True, 18: [1, 2, '6'], False: {12: (1, 2), 'string': 123}}))
+    # print(json.dumps({None: True, 18: [1, 2, '6'], False: {12: (1, 2), 'string': 123}}))
     json_string = to_json(person)
     print("Json string: ", json_string)
     # my_json = from_json(json.dumps({None: True, 18: [1, 2, '6'], False: {12: (1, 2), 'string': 123}}))

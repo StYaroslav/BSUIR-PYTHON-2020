@@ -4,6 +4,7 @@ import unittest
 from tasks.json_serializer import to_json
 
 
+
 class TestToJsonConverter(unittest.TestCase):
     def setUp(self):
         self.test_object = {None: True, 18: [1, 2, '6'], False: {12: (1, 2), 'string': 123}}

@@ -29,8 +29,8 @@ class TestExternalSortResult(unittest.TestCase):
             self.file.writelines('{}\n'.format(random.randint(-1000000, 1000000)) for _ in range(1000000))
 
     def test_file_is_sorted(self):
-        temp_files_list = split_file(os.getcwd() + "\\numbers.txt", 100000)
-        merge_split_files(temp_files_list)
+        temp_files_list = split_file(os.getcwd() + "\\numbers.txt", 100000, self.input_check)
+        merge_split_files(temp_files_list, self.input_check)
         duration = time.time() - self.start_time
         print("Big file performance duration: ", duration)
         self.assertTrue(file_is_sorted())
@@ -44,8 +44,8 @@ class TestExternalSortPerfomanceSmallFile(unittest.TestCase):
             self.file.writelines('{}\n'.format(random.randint(-1000000, 1000000)) for _ in range(100000))
 
     def test_perfomance(self):
-        temp_files_list = split_file(os.getcwd() + "\\numbers.txt", 100000)
-        merge_split_files(temp_files_list)
+        temp_files_list = split_file(os.getcwd() + "\\numbers.txt", 100000, self.input_check)
+        merge_split_files(temp_files_list, self.input_check)
 
     def tearDown(self):
         duration = time.time() - self.start_time

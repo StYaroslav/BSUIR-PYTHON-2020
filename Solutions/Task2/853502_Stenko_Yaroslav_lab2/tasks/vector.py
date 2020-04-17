@@ -26,7 +26,7 @@ class Vector:
             if self.__len__() == other.__len__():
                 return [v + w for v, w in zip(self.array, other)]
             else:
-                raise DimensionError
+                raise DimensionError("Vectors have different dimensions!")
         else:
             raise TypeError
 
@@ -35,7 +35,7 @@ class Vector:
             if self.__len__() == other.__len__():
                 return [v - w for v, w in zip(self.array, other)]
             else:
-                raise DimensionError
+                raise DimensionError("Vectors have different dimensions!")
         else:
             raise TypeError
 
@@ -46,11 +46,13 @@ class Vector:
             if self.__len__() == other.__len__():
                 return sum(v * w for v, w in zip(self.array, other))
             else:
-                raise DimensionError
+                raise DimensionError("Vectors have different dimensions!")
 
     def __eq__(self, other):
         return all([v == w for v, w in zip(self.array, other)])
 
 
 class DimensionError(Exception):
-    print("Vectors have different dimensions!")
+    def __init__(self, message='Error'):
+
+        self.message = message
