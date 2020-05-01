@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Our super doctors</h1>
+    {% if user.is_authenticated and user.is_doctor %}
+        <p><a href = "{% url 'schedule_create' %}">+Add schedule</a></p>
+    {% endif %}
+    {% for doctor in doctor_list %}
+        <img src="{{ doctor.image.url }}" width="150" align="left"/>
+        <p><h2><a href = "{% url 'doctor_detail' doctor.pk %}">{{ doctor.user.first_name }} {{ doctor.user.last_name }}
+        {{ doctor.user.patronymic }} ({{ doctor.category }})</a></h2></p>
+        <p>{{ doctor.speciality }}</p>
+        <h4 style="margin-top: 100px">Comment section:</h4>
+        {% if user.is_authenticated and user.is_patient %}
+        <p><a href = "{% url 'comment_add' doctor.pk %}">+Add comment</a></p>
+        {% endif %}
+        {% for comment in doctor.comments.all %}
+            <p>- {{ comment }} ({{ comment.patient.user.first_name }} {{ comment.patient.user.last_name }})</p>
+             {% if user.is_authenticated and user.is_patient and user.pk == comment.patient.pk %}
+                <p><a href = '{% url 'comment_edit' comment.pk %}'>Edit</a>| <a href = "{% url 'comment_delete' comment.pk %}">Delete</a></p>
+             {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endblock content %}

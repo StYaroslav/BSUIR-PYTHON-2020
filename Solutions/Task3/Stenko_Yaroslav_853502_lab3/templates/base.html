@@ -1,0 +1,20 @@
+<html lang="En">
+<head>
+    <title>
+        Clinic app
+    </title>
+</head>
+<body>
+<header><h1>Clinic app</h1></header>
+    {% if user.is_authenticated %}
+        <p><a href ="{% url 'logout' %}">Log out</a></p>
+        <p>Hi {{ user.first_name }}! (you are logged in as {% if user.is_patient %} patient {% elif user.is_doctor %} doctor{% endif %})</p>
+    {% else %}
+        <p><a href = "{% url 'login'%}">Log in</a> | <a href = "{% url 'signup' %}">Sign up</a></p>
+    {% endif %}
+    <div>
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+</html>

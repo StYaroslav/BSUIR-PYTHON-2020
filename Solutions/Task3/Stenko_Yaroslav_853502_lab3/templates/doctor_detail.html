@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Doctor's schedule</h2>
+    {% for schedule in schedules %}
+        <p><a href = '#'>{{ schedule.date }}</a></p>
+        {% if schedule.doctor.pk == user.pk %}
+            <p><a href = '{% url 'schedule_edit' schedule.pk %}'>Edit</a>| <a href = "{% url 'schedule_delete' schedule.pk %}">Delete</a></p>
+        {% endif %}
+    {%  endfor %}
+{% endblock content %}
